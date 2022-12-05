@@ -80,7 +80,7 @@ class DbusService:
             elif value_type == "none":
                 value = None
 
-            print("Updated " + path + " " + str(value))
+            # print("Updated " + path + " " + str(value))
             self.dbusservice[path] = value
 
 
