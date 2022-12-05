@@ -96,6 +96,8 @@ def main():
     mainloop = gobject.MainLoop()
     DBusGMainLoop(set_as_default=True)
 
+    print("==== dbus-mqtt-services started ====")
+
     try:
         mainloop.run()
     except KeyboardInterrupt:
