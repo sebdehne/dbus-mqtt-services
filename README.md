@@ -5,6 +5,9 @@ MQTT and creates a new "service" on the dbus as instructed in the MQTT-message. 
 you to create whatever service you desire on the dbus without having to run special 
 python-code on the VenusOS device.
 
+Credits: Louis Van Der Walt's [dbus-serialbattery](https://github.com/Louisvdw/dbus-serialbattery)
+was a great inspiration for this work.
+
 ## Example
 The following example message published to the topic `W/dbus-mqtt-services` will generate a 
 new battery service on the dbus:
