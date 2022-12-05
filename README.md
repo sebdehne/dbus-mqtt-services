@@ -10,7 +10,7 @@ was a great inspiration for this work.
 
 ## Example
 The following example message published to the topic `W/dbus-mqtt-services` will generate a 
-new battery service on the dbus:
+new battery service on the dbus (this is not a complete list og all parameters for a battery-service):
 
     {
       "service": "daly_bms_battery_1",
