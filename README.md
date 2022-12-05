@@ -1,21 +1,19 @@
 # dbus-mqtt-services
-A driver for [VenusOS](https://github.com/victronenergy/venus/wiki), which listens on a special MQTT and creates a new service in the dbus
-as instructed in the MQTT-message. This allows you to create whatever service you desire
-on the dbus without having to run special python-code on the VenusOS device.
+A [driver](https://github.com/victronenergy/venus/wiki/howto-add-a-driver-to-Venus) 
+for [VenusOS](https://github.com/victronenergy/venus/wiki), which listens on a special 
+MQTT and creates a new service in the dbus as instructed in the MQTT-message. This allows 
+you to create whatever service you desire on the dbus without having to run special 
+python-code on the VenusOS device.
 
 ## Install
 The installation procedure requires [SSH root access](https://www.victronenergy.com/live/ccgx:root_access) to your VenusOS device.
 
-Download the code
-    
-    $ cd
-    $ curl https://raw.githubusercontent.com/sebdehne/dbus-mqtt-services/master/dbus-mqtt-services.py -o dbus-mqtt-services.py
-
-Create a symbolic link
-
-    $ ln -s /data/etc/dbus-mqtt-services.py /opt/victronenergy/dbus-mqtt-services.py
+    $ wget https://raw.githubusercontent.com/sebdehne/dbus-mqtt-services/master/etc/dbus-mqtt-services/installrelease.sh
+    $ sh installrelease.sh
+    $ reboot
 
 ## How to remove settings from 'localsettings'
+In case your service creates an vrm-instance which you do not want, here is how to remove settings:
 
 Stop the localsettings service
 
