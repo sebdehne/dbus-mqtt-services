@@ -1,0 +1,3 @@
+etc/dbus-mqtt-services/service/run
+etc/dbus-mqtt-services/service/log/run
+etc/dbus-mqtt-services/dbus-mqtt-services.py

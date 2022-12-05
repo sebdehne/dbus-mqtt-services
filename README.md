@@ -6,23 +6,35 @@ on the dbus without having to run special python-code on the VenusOS device.
 ## Install
 The installation procedure requires [SSH root access](https://www.victronenergy.com/live/ccgx:root_access) to your VenusOS device.
 
-    $ /data/etc
+Download the code
+    
+    $ cd
+    $ curl https://raw.githubusercontent.com/sebdehne/dbus-mqtt-services/master/dbus-mqtt-services.py -o dbus-mqtt-services.py
 
+Create a symbolic link
+
+    $ ln -s /data/etc/dbus-mqtt-services.py /opt/victronenergy/dbus-mqtt-services.py
 
 ## How to remove settings from 'localsettings'
-    # stop the localsettings service
+
+Stop the localsettings service
+
     $ svc -d /service/localsettings
 
-    # make a backup
+Make a backup
+
     $ cd /data/conf
     $ cp settings.xml settings.xml.backup
 
-    # remove the settings as needed
+Remove the settings as needed
+
     $ vi settings.xml
 
-    # bring the localsettings service back online
+Bring the localsettings service back online
+
     $ svc -u /service/localsettings
     
-    # check the logs for any issues
+Check the logs for any issues
+
     $ less /data/log/localsettings/current
 

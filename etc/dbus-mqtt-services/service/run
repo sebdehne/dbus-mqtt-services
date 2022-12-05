@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "*** starting dbus-mqtt-services ***"
+exec 2>&1
+exec /opt/victronenergy/dbus-mqtt-services/dbus-mqtt-services.py
