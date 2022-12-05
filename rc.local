@@ -1,0 +1,2 @@
+#!/bin/bash
+sh /data/etc/dbus-mqtt-services/reinstalllocal.sh

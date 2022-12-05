@@ -1,3 +1,5 @@
+rc.local
 etc/dbus-mqtt-services/service/run
 etc/dbus-mqtt-services/service/log/run
 etc/dbus-mqtt-services/dbus-mqtt-services.py
+etc/dbus-mqtt-services/reinstalllocal.sh
