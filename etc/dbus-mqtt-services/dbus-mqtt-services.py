@@ -64,7 +64,11 @@ class DbusService:
                 value = None
 
             print("Add path " + path + " " + str(value))
-            self.dbusservice.add_path(path, value, writeable=writeable)
+            try:
+                self.dbusservice.add_path(path, value, writeable=writeable)
+            except KeyError:
+                print("Could not add path " + path)
+
 
     def republish(self, dbus_data):
 
@@ -81,7 +85,10 @@ class DbusService:
                 value = None
 
             # print("Updated " + path + " " + str(value))
-            self.dbusservice[path] = value
+            try:
+                self.dbusservice[path] = value
+            except KeyError:
+                print("Could not update path " + path)
 
 
 def main():
@@ -118,11 +125,20 @@ def on_message(client, userdata, message):
     service = json_data["service"]
     dbus_data = json_data["dbus_data"]
     if service in known_dbus_services:
-        known_dbus_services[service].republish(dbus_data)
+        try:
+            known_dbus_services[service].republish(dbus_data)
+        except Exception as e:
+            print("Could not update service:")
+            print(e)
+
     else:
         service_type = json_data["serviceType"]
         service_instance = json_data["serviceInstance"]
-        known_dbus_services[service] = DbusService(service, service_type, service_instance, dbus_data)
+        try:
+            known_dbus_services[service] = DbusService(service, service_type, service_instance, dbus_data)
+        except Exception as e:
+            print("Could not add new service:")
+            print(e)
 
 
 if __name__ == "__main__":
