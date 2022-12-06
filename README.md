@@ -1,9 +1,9 @@
 # dbus-mqtt-services
 A [driver](https://github.com/victronenergy/venus/wiki/howto-add-a-driver-to-Venus) 
 for [VenusOS](https://github.com/victronenergy/venus/wiki), which listens on a special 
-MQTT and creates a new "service" on the dbus as instructed in the MQTT-message. This allows 
-you to create whatever service you desire on the dbus without having to run special 
-python-code on the VenusOS device.
+MQTT topic and creates a new dbus-service as instructed in the MQTT-message. This allows 
+you to create whatever dbus-service you desire without having to run special python-code 
+on the VenusOS device.
 
 Credits: Louis Van Der Walt's [dbus-serialbattery](https://github.com/Louisvdw/dbus-serialbattery)
 was a great inspiration for this work.
