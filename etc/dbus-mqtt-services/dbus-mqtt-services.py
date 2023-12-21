@@ -11,13 +11,23 @@ from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib as gobject
 
 # Victron packages
-sys.path.insert(1, os.path.join(os.path.dirname(__file__), '/opt/victronenergy/dbus-systemcalc-py/ext/velib_python'))
+sys.path.insert(
+    1,
+    os.path.join(
+        os.path.dirname(__file__),
+        "/opt/victronenergy/dbus-systemcalc-py/ext/velib_python",
+    ),
+)
 from settingsdevice import SettingsDevice
 from vedbus import VeDbusService
 
 
 def get_bus():
-    return dbus.SessionBus() if 'DBUS_SESSION_BUS_ADDRESS' in os.environ else dbus.SystemBus()
+    return (
+        dbus.SessionBus()
+        if "DBUS_SESSION_BUS_ADDRESS" in os.environ
+        else dbus.SystemBus()
+    )
 
 
 client = mqtt.Client(client_id="")
@@ -27,7 +37,9 @@ known_dbus_services = {}
 
 
 class DbusService:
-    def __init__(self, dbus_service, dbus_service_type, dbus_service_instance, dbus_data):
+    def __init__(
+        self, dbus_service, dbus_service_type, dbus_service_instance, dbus_data
+    ):
         self.dbus_service = dbus_service
         self.dbus_service_type = dbus_service_type
         self.dbus_service_instance = dbus_service_instance
@@ -35,18 +47,25 @@ class DbusService:
         # Find an existing VRM-instance ID in "localsettings", or add it as needed:
         settings_device = SettingsDevice(get_bus(), {}, eventCallback=None)
         busitem = settings_device.addSetting(
-            '/Settings/Devices/' + dbus_service + '/ClassAndVrmInstance',
-            dbus_service_type + ':' + str(dbus_service_instance),
+            "/Settings/Devices/" + dbus_service + "/ClassAndVrmInstance",
+            dbus_service_type + ":" + str(dbus_service_instance),
             0,
-            0
+            0,
         )
-        val = busitem.get_value().split(':')
+        val = busitem.get_value().split(":")
         self.dbus_service_type = val[0]
         self.dbus_service_instance = int(val[1])
-        print("New service added: ", self.dbus_service, self.dbus_service_type, ":" + str(self.dbus_service_instance))
+        print(
+            "New service added: ",
+            self.dbus_service,
+            self.dbus_service_type,
+            ":" + str(self.dbus_service_instance),
+        )
 
         # start Dbus-service
-        self.dbusservice = VeDbusService("com.victronenergy." + dbus_service_type + "." + dbus_service, get_bus())
+        self.dbusservice = VeDbusService(
+            "com.victronenergy." + dbus_service_type + "." + dbus_service, get_bus()
+        )
         self.dbusservice.add_path("/DeviceInstance", self.dbus_service_instance)
 
         # add all paths for our service:
@@ -64,14 +83,37 @@ class DbusService:
                 value = None
 
             print("Add path " + path + " " + str(value))
+            digits = 1
+            if "digits" in dbus_item:
+                digits = dbus_item["digits"]
+
             try:
-                self.dbusservice.add_path(path, value, writeable=writeable)
+                if "unit" in dbus_item:
+                    unit = " " + dbus_item["unit"]
+                    self.dbusservice.add_path(
+                        path,
+                        value,
+                        gettextcallback=self.value_formatter(unit, digits=digits),
+                        writeable=writeable,
+                        onchangecallback=self._handlechangedvalue,
+                    )
+                else:
+                    self.dbusservice.add_path(
+                        path,
+                        value,
+                        writeable=writeable,
+                    )
             except KeyError:
                 print("Could not add path " + path)
 
+    def value_formatter(self, unit, digits=1):
+        return lambda p, v: (format(v, f",.{digits}f") + f" {unit}")
+
+    def _handlechangedvalue(self, path, value):
+        print("someone else updated %s to %s" % (path, value))
+        return True  # accept the change
 
     def republish(self, dbus_data):
-
         for dbus_item in dbus_data:
             path = dbus_item["path"]
             value = dbus_item["value"]
@@ -135,7 +177,9 @@ def on_message(client, userdata, message):
         service_type = json_data["serviceType"]
         service_instance = json_data["serviceInstance"]
         try:
-            known_dbus_services[service] = DbusService(service, service_type, service_instance, dbus_data)
+            known_dbus_services[service] = DbusService(
+                service, service_type, service_instance, dbus_data
+            )
         except Exception as e:
             print("Could not add new service:")
             print(e)
