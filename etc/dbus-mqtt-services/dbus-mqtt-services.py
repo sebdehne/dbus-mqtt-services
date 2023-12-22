@@ -82,18 +82,18 @@ class DbusService:
             elif value_type == "none":
                 value = None
 
-            print("Add path " + path + " " + str(value))
-            digits = 1
             if "digits" in dbus_item:
                 digits = dbus_item["digits"]
+            else:
+                digits = 1
 
+            print("Add path " + path + " " + str(value))
             try:
                 if "unit" in dbus_item:
-                    unit = " " + dbus_item["unit"]
                     self.dbusservice.add_path(
                         path,
                         value,
-                        gettextcallback=self.value_formatter(unit, digits=digits),
+                        gettextcallback=self.value_formatter(dbus_item["unit"], digits=digits),
                         writeable=writeable,
                         onchangecallback=self._handlechangedvalue,
                     )
@@ -107,7 +107,7 @@ class DbusService:
                 print("Could not add path " + path)
 
     def value_formatter(self, unit, digits=1):
-        return lambda p, v: (format(v, f",.{digits}f") + f" {unit}")
+        return lambda p, v: ( f"{{:.{digits}f}} {unit}".format(v).strip())
 
     def _handlechangedvalue(self, path, value):
         print("someone else updated %s to %s" % (path, value))
