@@ -10,7 +10,8 @@ was a great inspiration for this work.
 
 ## Example
 The following example message published to the topic `W/dbus-mqtt-services` will generate a 
-new battery service on the dbus (this is not a complete list og all parameters for a battery-service):
+new battery service on the dbus (this is not a complete list of all parameters for a battery-service):
+(see further example devices in the [examples](./examples) folder.)
 
 ```
     {
@@ -82,17 +83,19 @@ new battery service on the dbus (this is not a complete list og all parameters f
     }
 ```
 
-see for further example devices in the examples folder
-
 ## Formatting
 
-For formaating the values there are 2 additional field
-`"digits": 3` is to indicate the number of digits in the value. (note, Victron does not always show all digits in the UI, this value provides the max digits visible)
-`"unit": "kWh"` is to indicate the unit visible in the UI
+For formatting the values there are 2 additional field. These are not published on the dbus, but instead used for setting up the device.
+
+* `"digits": 3` is to indicate the number of digits in the value. (note, Victron does not always show all digits in the UI, this value provides the max digits visible)
+* `"unit": "kWh"` is to indicate the unit visible in the UI
 
 ## Note
-The device is setup by the first message received for the device. If after initiation new paths are added, these will not be seen until a restart.
+The device is setup by the first message received for the device. 
+
+If after initiation new paths are added, these will not be seen until a restart.
 If you don't want a full reboot, you can restart the script with this command
+
 `kill $(ps | grep dbus-mqtt-services | grep python | awk '{print $1}')`
 
 ## Install
