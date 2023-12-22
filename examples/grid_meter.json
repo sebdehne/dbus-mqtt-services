@@ -1,0 +1,210 @@
+{
+    "service": "p1_grid_1",
+    "serviceType": "grid",
+    "serviceInstance": 0,
+    "dbus_data": [
+        {
+            "path": "/Mgmt/ProcessName",
+            "value": "P1 Bridge",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/Mgmt/ProcessVersion",
+            "value": "1.0",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/Mgmt/Connection",
+            "value": "MQTT P1",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/ProductId",
+            "value": "45069",
+            "valueType": "integer",
+            "writeable": false
+        },
+        {
+            "path": "/ProductName",
+            "value": "P1 Energy Meter",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/FirmwareVersion",
+            "value": "1.0",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/HardwareVersion",
+            "value": "1.0",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/Connected",
+            "value": "1",
+            "valueType": "integer",
+            "writeable": false
+        },
+        {
+            "path": "/CustomName",
+            "value": "P1 MQTT Mapper",
+            "valueType": "string",
+            "writeable": true
+        },
+        {
+            "path": "/Ac/Power",
+            "value": 597.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "W"
+        },
+        {
+            "path": "/Ac/Energy/Forward",
+            "value": 5.213,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/Energy/Reverse",
+            "value": 0.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L1/Voltage",
+            "value": 234.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "V",
+            "digits": 0
+        },
+        {
+            "path": "/Ac/L2/Voltage",
+            "value": 232.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "V",
+            "digits": 0
+        },
+        {
+            "path": "/Ac/L3/Voltage",
+            "value": 232.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "V",
+            "digits": 0
+        },
+        {
+            "path": "/Ac/L1/Current",
+            "value": 1.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "A"
+        },
+        {
+            "path": "/Ac/L2/Current",
+            "value": 1.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "A"
+        },
+        {
+            "path": "/Ac/L3/Current",
+            "value": 1.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "A"
+        },
+        {
+            "path": "/Ac/L1/Power",
+            "value": 109.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "W"
+        },
+        {
+            "path": "/Ac/L2/Power",
+            "value": 189.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "W"
+        },
+        {
+            "path": "/Ac/L3/Power",
+            "value": 276.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "W"
+        },
+        {
+            "path": "/Ac/L1/Energy/Forward",
+            "value": 0.5874077778775245,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L1/Energy/Reverse",
+            "value": 0.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L2/Energy/Forward",
+            "value": 1.493354444438126,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L2/Energy/Reverse",
+            "value": 0.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L3/Energy/Forward",
+            "value": 3.1176866666302088,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Ac/L3/Energy/Reverse",
+            "value": 0.0,
+            "valueType": "float",
+            "writeable": false,
+            "unit": "kWh",
+            "digits": 3
+        },
+        {
+            "path": "/Serial",
+            "value": "E0069000717912321",
+            "valueType": "string",
+            "writeable": false
+        },
+        {
+            "path": "/UpdateIndex",
+            "value": 32,
+            "valueType": "integer",
+            "writeable": false
+        }
+    ]
+}

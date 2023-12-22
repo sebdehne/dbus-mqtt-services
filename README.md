@@ -10,8 +10,10 @@ was a great inspiration for this work.
 
 ## Example
 The following example message published to the topic `W/dbus-mqtt-services` will generate a 
-new battery service on the dbus (this is not a complete list og all parameters for a battery-service):
+new battery service on the dbus (this is not a complete list of all parameters for a battery-service):
+(see further example devices in the [examples](./examples) folder.)
 
+```
     {
       "service": "daly_bms_battery_1",
       "serviceType": "battery",
@@ -79,6 +81,22 @@ new battery service on the dbus (this is not a complete list og all parameters f
         },
       ]
     }
+```
+
+## Formatting
+
+For formatting the values there are 2 additional field. These are not published on the dbus, but instead used for setting up the device.
+
+* `"digits": 3` is to indicate the number of digits in the value. (note, Victron does not always show all digits in the UI, this value provides the max digits visible)
+* `"unit": "kWh"` is to indicate the unit visible in the UI
+
+## Note
+The device is setup by the first message received for the device. 
+
+If after initiation new paths are added, these will not be seen until a restart.
+If you don't want a full reboot, you can restart the script with this command
+
+`kill $(ps | grep dbus-mqtt-services | grep python | awk '{print $1}')`
 
 ## Install
 The installation procedure requires [SSH root access](https://www.victronenergy.com/live/ccgx:root_access) to your VenusOS device.
@@ -111,3 +129,8 @@ Check the logs for any issues
 
     $ less /data/log/localsettings/current
 
+## Screenshot of result
+![Tile Overview](examples/gridmeter_p1_homescreen.png)
+![Remote Console - Overview](examples/gridmeter.png) 
+![SmartMeter - Values](examples/gridmeter_p1.png)
+![SmartMeter - Device Details](examples/gridmeter_p1_device.png)
