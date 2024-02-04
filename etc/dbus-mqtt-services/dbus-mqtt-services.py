@@ -156,8 +156,12 @@ def main():
 def on_message(client, userdata, message):
     global known_dbus_services
     payload = str(message.payload.decode("utf-8"))
-    json_data = json.loads(payload)
-
+    
+    try:
+        json_data = json.loads(payload)
+    except json.JSONDecodeError as e:
+        print("Invalid JSON syntax:", e)
+        return
     # print("message received ", payload)
     # print("message jsonData ", json_data)
     # print("message topic=", message.topic)
