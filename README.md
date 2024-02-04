@@ -78,7 +78,7 @@ new battery service on the dbus (this is not a complete list of all parameters f
           "value": "52.176",
           "valueType": "float",
           "writeable": false
-        },
+        }
       ]
     }
 ```
