@@ -8,8 +8,13 @@ on the VenusOS device.
 Credits: Louis Van Der Walt's [dbus-serialbattery](https://github.com/Louisvdw/dbus-serialbattery)
 was a great inspiration for this work.
 
+## dbus-mqt-services MQTT topic
+For publishing to the local mqtt service on the VenusOS device use topic `/dbus-mqtt-services`
+
+Use topic `W/dbus-mqtt-services` if you use the remote victron MQTT service.
+
 ## Example
-The following example message published to the topic `W/dbus-mqtt-services` will generate a 
+The following example message published to the dbus-mqtt-services topic will generate a 
 new battery service on the dbus (this is not a complete list of all parameters for a battery-service):
 (see further example devices in the [examples](./examples) folder.)
 
