@@ -31,7 +31,7 @@ def get_bus():
 
 
 client = mqtt.Client(client_id="")
-topic = "W/dbus-mqtt-services"
+topics = ["W/dbus-mqtt-services" , "/dbus-mqtt-services"]
 
 known_dbus_services = {}
 
@@ -139,7 +139,8 @@ def main():
 
     client.on_message = on_message
     client.connect("127.0.0.1")
-    client.subscribe(topic)
+    for topic in topics:
+        client.subscribe(topic)
     client.loop_start()
 
     mainloop = gobject.MainLoop()
