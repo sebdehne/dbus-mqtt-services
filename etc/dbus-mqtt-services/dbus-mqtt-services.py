@@ -5,6 +5,7 @@ import os
 import sys
 
 import dbus
+import paho.mqtt
 import paho.mqtt.client as mqtt
 # Dbus
 from dbus.mainloop.glib import DBusGMainLoop
@@ -29,9 +30,13 @@ def get_bus():
         else dbus.SystemBus()
     )
 
+client = None
+if paho.mqtt.__version__ == " 2.0.0":   # workaround stupid non-backwards compatible v 2.0 see eclipse-paho/paho.mqtt.python#814
+    client = mqtt.Client(mqtt.CallbackAPIVersion.mqtt.CallbackAPIVersion.VERSION1, client_id="")
+else:
+    client = mqtt.Client(client_id="")
 
-client = mqtt.Client(client_id="")
-topic = "W/dbus-mqtt-services"
+topics = ["W/dbus-mqtt-services" , "/dbus-mqtt-services"]
 
 known_dbus_services = {}
 
@@ -64,8 +69,8 @@ class DbusService:
 
         # start Dbus-service
         self.dbusservice = VeDbusService(
-            "com.victronenergy." + dbus_service_type + "." + dbus_service, get_bus()
-        )
+            "com.victronenergy." + dbus_service_type + "." + dbus_service, bus=get_bus(), register=False
+         )
         self.dbusservice.add_path("/DeviceInstance", self.dbus_service_instance)
 
         # add all paths for our service:
@@ -105,6 +110,8 @@ class DbusService:
                     )
             except KeyError:
                 print("Could not add path " + path)
+        self.dbusservice.register()
+        print (f'Added to D-Bus: {self.dbus_service}')
 
     def value_formatter(self, unit, digits=1):
         return lambda p, v: ( f"{{:.{digits}f}} {unit}".format(v).strip())
@@ -139,7 +146,8 @@ def main():
 
     client.on_message = on_message
     client.connect("127.0.0.1")
-    client.subscribe(topic)
+    for topic in topics:
+        client.subscribe(topic)
     client.loop_start()
 
     mainloop = gobject.MainLoop()
@@ -178,6 +186,10 @@ def on_message(client, userdata, message):
             print(e)
 
     else:
+        if len (dbus_data) < 2:
+            print (f'Not enough data to create service {service}')
+            return
+        
         service_type = json_data["serviceType"]
         service_instance = json_data["serviceInstance"]
         try:
