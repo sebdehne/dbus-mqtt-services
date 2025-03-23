@@ -31,8 +31,8 @@ def get_bus():
     )
 
 client = None
-if paho.mqtt.__version__ == " 2.0.0":   # workaround stupid non-backwards compatible v 2.0 see eclipse-paho/paho.mqtt.python#814
-    client = mqtt.Client(mqtt.CallbackAPIVersion.mqtt.CallbackAPIVersion.VERSION1, client_id="")
+if paho.mqtt.__version__ == "2.0.0":   # workaround stupid non-backwards compatible v 2.0 see eclipse-paho/paho.mqtt.python#814
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, client_id="")
 else:
     client = mqtt.Client(client_id="")
 
