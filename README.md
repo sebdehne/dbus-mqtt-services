@@ -139,3 +139,6 @@ Check the logs for any issues
 ![Remote Console - Overview](examples/gridmeter.png) 
 ![SmartMeter - Values](examples/gridmeter_p1.png)
 ![SmartMeter - Device Details](examples/gridmeter_p1_device.png)
+
+## Contributions
+The dbus-mqtt-services driver was written by [sebdehne](https://github.com/sebdehne) with contributions by [marcelrv](https://github.com/marcelrv) and [RFDarter](https://github.com/RFDarter).
